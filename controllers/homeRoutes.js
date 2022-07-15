@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       // Pass serialized data and session flag into template
       res.render('homepage', { 
         posts, 
-        // logged_in: req.session.logged_in 
+        logged_in: req.session.logged_in 
       });
     } catch (err) {
       res.status(500).json(err);
@@ -34,10 +34,13 @@ router.get('/', async (req, res) => {
       return;
     }
   
-    res.render('login');
+    res.render('login',{
+    logged_in: req.session.logged_in 
+    });
   });
 
   router.get('/dashboard', async (req, res) => {
+    console.log(req.session.user_id);
     try {
       // Get all posts by the current session username 
       const postData = await Post.findAll({
@@ -47,6 +50,9 @@ router.get('/', async (req, res) => {
             attributes: ['username'],
           },
         ],
+        where: {
+          user_id: req.session.user_id,
+        }
       });
   
       // Serialize data so the template can read it
