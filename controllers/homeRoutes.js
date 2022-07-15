@@ -39,6 +39,18 @@ router.get('/', async (req, res) => {
     });
   });
 
+  router.get('/signup', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.logged_in) {
+      res.redirect('/dashboard');
+      return;
+    }
+  
+    res.render('signup',{
+    // logged_in: req.session.logged_in 
+    });
+  });
+
   router.get('/dashboard', async (req, res) => {
     console.log(req.session.user_id);
     try {
