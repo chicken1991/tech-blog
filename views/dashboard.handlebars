@@ -11,12 +11,10 @@
   <div class="mb-3">
     <label for="textInput" class="form-label">Post body</label>
     <textarea type="text" class="form-control" id="post-text" rows="3"></textarea>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" id="post-submit">Submit</button>
   </div>
   </div>
 </form>
-
-<script src="./js/post.js"></script>
 
 {{!-- Show all historical posts --}}
 {{#each posts as |post| }}
@@ -33,3 +31,7 @@
 {{/each}}
 
 </div>
+
+
+
+<script src="./js/post.js"></script>
