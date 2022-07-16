@@ -1,4 +1,4 @@
-const posting = async (event) => {
+const newPost = async (event) => {
 
     event.preventDefault();
   
@@ -18,6 +18,34 @@ const posting = async (event) => {
     }
   };
 
+  const deletePost = async (event) => {
+
+    event.preventDefault();
+  
+    const title = document.querySelector('#post-title');
+    const postId = document.querySelector('#post-id');
+
+    console.log(postId);
+  
+    if (title && body) {
+      const response = await fetch('/api/post', {
+        method: 'POST',
+        body: JSON.stringify({ title, text }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (response.ok) {
+        document.location.replace('/dashboard');
+      }
+    }
+  };
+
+
+
 document
 .querySelector('.post-form')
-.addEventListener('submit', posting);
+.addEventListener('submit', newPost);
+
+document
+.querySelector('.post-delete')
+.addEventListener('submit', deletePost)
