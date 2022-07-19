@@ -1,9 +1,9 @@
 const newPost = async (event) => {
 
-  console.log("newPost activated, bitch");
+  // console.log("newPost activated, bitch");
 
     event.preventDefault();
-    console.log("start of newPost");
+    // console.log("start of newPost");
     // const title = document.querySelector('#post-title').value;
     // const text = document.querySelector('#post-text').value;
     const title = "Hardcoded title";
