@@ -1,0 +1,20 @@
+
+  const deletePost = async (event) => {
+alert("the time has come");
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+    alert(id);  
+
+    const response = await fetch(`/api/posts/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert('Failed to delete project');
+    }
+  }
+};
+
+document.querySelector('.post-list').addEventListener('click', deletePost)

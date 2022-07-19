@@ -1,0 +1,32 @@
+{{#if editable}}
+    {{#each posts as |post| }}
+        <div class="card post-list" style="width: 50rem;">
+            <div class="card-body">
+                <p style="display:none" class="post_id">{{post.id}}</p>
+                <h5 class="card-title">{{post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
+                </h6>
+                <p class="card-text">{{post.text}}</p>
+                <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+                <button type="button" id="up-button" class="btn btn-info post-update" style="width:20rem">Update Post</button>
+            </div>
+        </div>
+    {{/each}}
+
+    {{else}}
+        {{#each posts as |post| }}
+        <div class="card post-list" id={{post.id}} style="width: 50rem;">
+            <div class="card-body">
+                <p style="display:none" class="post_id">{{post.id}}</p>
+                <h5 class="card-title">{{post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
+                </h6>
+                <p class="card-text">{{post.text}}</p>
+            </div>
+        </div>
+        {{/each}}
+
+{{/if}}
+
+
+<script src="./js/delete_post.js"></script>

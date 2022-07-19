@@ -52,7 +52,6 @@ router.get('/', async (req, res) => {
   });
 
   router.get('/dashboard', async (req, res) => {
-    console.log(req.session.user_id);
     try {
       // Get all posts by the current session username 
       const postData = await Post.findAll({
@@ -74,6 +73,44 @@ router.get('/', async (req, res) => {
       res.render('dashboard', { 
         posts, 
         logged_in: req.session.logged_in 
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+   //Display a single blog post
+   router.get('/:id', async (req, res) => {
+    try {
+      // Get all posts and JOIN with user data of ID /:id
+      const postData = await Post.findAll({
+        where: {
+          id: req.params.id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['username', 'id'],
+          },
+        ],
+      });
+
+      // Serialize data so the template can read it
+      const posts = postData.map((Post) => Post.get({ plain: true }));
+
+
+      //Check if post user_id is same as sess id, and show del and edit buttons if true
+      let editable = false;
+      if (posts[0].user_id == req.session.user_id){
+        editable = true;
+      };
+
+
+      // Pass serialized data and session flag into template
+      res.render('post', { 
+        posts, 
+        logged_in: req.session.logged_in,
+        editable,
       });
     } catch (err) {
       res.status(500).json(err);

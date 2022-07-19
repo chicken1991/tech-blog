@@ -19,15 +19,16 @@
 {{!-- Show all historical posts --}}
 {{#each posts as |post| }}
 <div class="card" style="width: 50rem;">
-  <div id="post-id" style="display:none">{{post.id}}</div>
-  <button type="button" class="btn btn-danger" id="post-delete" style="width:20rem">Delete Post</button>
-  <button type="button" class="btn btn-info" style="width:20rem">Update Post</button>
+  <div class="post-id" style="display:none">{{post.id}}</div>
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Posted by YOU at {{format_date post.create_date}}</h6>
     <p class="card-text">{{post.text}}</p>
+    <a href="/{{post.id}}" class="stretched-link"></a>
   </div>
 </div>
+{{else}}
+{{!-- insert "no posts yet!" --}}
 {{/each}}
 
 </div>
@@ -35,3 +36,5 @@
 
 
 <script src="./js/post.js"></script>
+
+{{!-- href="/{{post.id}}" --}}

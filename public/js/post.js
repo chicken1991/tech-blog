@@ -19,19 +19,16 @@ const newPost = async (event) => {
   };
 
   const deletePost = async (event) => {
-
     event.preventDefault();
-    console.log("Start of deletePost");
-    const title = document.querySelector('#post-title');
-    const postId = document.querySelector('#post-id');
+    const post_id = document.querySelector(``).value;
+
+    alert("starting to delete " + post_id)
 
     // console.log(postId);
   
-    if (title && body) {
-      const response = await fetch('/api/post', {
-        method: 'POST',
-        body: JSON.stringify({ title, text }),
-        headers: { 'Content-Type': 'application/json' },
+    if (post_id) {
+      const response = await fetch(`/api/post/${post_id}`, {
+        method: 'DELETE',
       });
   
       if (response.ok) {
@@ -47,4 +44,4 @@ document.querySelector('.post-form').addEventListener('submit', newPost);
 
 document
 .querySelector('.post-delete')
-.addEventListener('submit', deletePost)
+.addEventListener('click', deletePost)
