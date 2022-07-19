@@ -6,10 +6,9 @@ router.post('/', async (req, res) => {
   // console.log("Start of post route");
   // console.log(req.body);
   try {
-    // console.log("new post with user_id of " + user_id);
     const newPost = await Post.create({
       ...req.body,
-      // user_id: req.session.user_id,
+      user_id: req.session.user_id,
     });
     console.log(newPost);
     res.status(200).json(newPost);

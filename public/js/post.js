@@ -1,13 +1,9 @@
 const newPost = async (event) => {
 
-  // console.log("newPost activated, bitch");
 
     event.preventDefault();
-    // console.log("start of newPost");
-    // const title = document.querySelector('#post-title').value;
-    // const text = document.querySelector('#post-text').value;
-    const title = "Hardcoded title";
-    const text = "hardcoded text body";
+    const title = document.querySelector('#post-title').value;
+    const text = document.querySelector('#post-text').value;
   
     if (title && text) {
       const response = await fetch('/api/posts', {
@@ -17,11 +13,7 @@ const newPost = async (event) => {
       });
   
       if (response.ok) {
-        alert("response is okay");
         document.location.replace('/dashboard');
-        console.log("End of newPost");
-      } else {
-        console.log("response not okay ==============================");
       }
     }
   };
@@ -47,13 +39,11 @@ const newPost = async (event) => {
         console.log("End of deletePost");
       }
     }
-  };
+  }
 
 
 
-document
-.querySelector('#post-submit')
-.addEventListener('submit', newPost);
+document.querySelector('.post-form').addEventListener('submit', newPost);
 
 document
 .querySelector('.post-delete')
