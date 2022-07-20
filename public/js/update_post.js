@@ -10,6 +10,7 @@ const updatePost = async (event) => {
       const response = await fetch(`/updatepost/${id}`, {
         method: 'PUT',
         body: JSON.stringify({ title, text, id }),
+        headers: { 'Content-Type': 'application/json' }
       });
   
       if (response.ok) {
