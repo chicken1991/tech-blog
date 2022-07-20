@@ -1,0 +1,15 @@
+{{#each posts as |post|}}
+<form class="post-form" style="width: 70rem; margin:2rem;">
+  <h1>Update Post ID:{{post.id}}</h1>
+  <div class="mb-8">
+    <label for="titleInput" class="form-label">Post Title</label>
+    <textarea type="text" class="form-control" id="post-title">{{post.title}}</textarea>
+    <label for="textInput" class="form-label">Post body</label>
+    <textarea type="text" class="form-control" id="post-text" rows="10">{{post.text}}</textarea>
+    <button type="button" class="btn btn-sm btn-danger" data-id="{{post.id}}">submit</button>
+  </div>
+</form>
+{{/each}}
+
+
+<script src="../js/update_post.js"></script>

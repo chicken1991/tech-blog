@@ -1,18 +1,13 @@
 
   const deletePost = async (event) => {
-alert("the time has come");
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
-    alert(id);  
-
     const response = await fetch(`/api/posts/${id}`, {
       method: 'DELETE',
     });
-
+    alert("Your post has been deleted")
     if (response.ok) {
       document.location.replace('/dashboard');
-    } else {
-      alert('Failed to delete project');
     }
   }
 };

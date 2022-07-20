@@ -8,7 +8,7 @@
                 </h6>
                 <p class="card-text">{{post.text}}</p>
                 <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
-                <button type="button" id="up-button" class="btn btn-info post-update" style="width:20rem">Update Post</button>
+                <a href="/postupdate/{{post.id}}">Update Post</a>
             </div>
         </div>
     {{/each}}
