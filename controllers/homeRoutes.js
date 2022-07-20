@@ -48,13 +48,12 @@ router.get('/signup', (req, res) => {
   }
 
   res.render('signup', {
-    // logged_in: req.session.logged_in 
   });
 });
 
 router.get('/dashboard', async (req, res) => {
   try {
-    // Get all posts by the current session username 
+    // Get all posts by the current session user id 
     const postData = await Post.findAll({
       include: [
         {
