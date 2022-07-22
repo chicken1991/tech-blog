@@ -1,6 +1,6 @@
 const router = require('express').Router();
 // const { where } = require('sequelize/types');
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -12,6 +12,10 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['username'],
         },
+        {
+          model: Comment,
+          attributes: ['id','user_id','post_id','create_date']
+        }
       ],
     });
 

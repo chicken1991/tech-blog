@@ -22,6 +22,9 @@
                 <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
                 </h6>
                 <p class="card-text">{{post.text}}</p>
+                {{#if logged_in}}
+                <button class="btn btn-secondary" data-id="{{post.id}}">Comment</button>
+                {{/if}}
             </div>
         </div>
         {{/each}}
@@ -29,7 +32,19 @@
 
 <div> 
     <h4>Comments</h4>
-
+    {{#if logged_in}}
+        {{#each comments as |comment|}}
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{comment.user}} posted on {{comment.create_date}}
+                        </button>
+                    </h2>
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
 
 </div>
 
