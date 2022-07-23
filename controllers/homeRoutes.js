@@ -109,12 +109,29 @@ router.get('/:id', async (req, res) => {
       editable = true;
     };
 
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+      where: {
+        post_id: req.params.id,
+      },
+    
+    });
+
+    const comments = commentData.map((Comment) => Comment.get({ plain: true }));
+
 
     // Pass serialized data and session flag into template
     res.render('post', {
       posts,
       logged_in: req.session.logged_in,
       editable,
+      comments,
+      postID: req.params.id
     });
   } catch (err) {
     res.status(500).json(err);

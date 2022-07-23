@@ -12,4 +12,4 @@
   }
 };
 
-document.querySelector('.post-list').addEventListener('click', deletePost)
+document.querySelector('#delete-btn').addEventListener('click', deletePost)

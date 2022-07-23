@@ -1,52 +1,61 @@
-{{#if editable}}
-    {{#each posts as |post| }}
-        <div class="card post-list" style="width: 50rem;">
-            <div class="card-body">
-                <p style="display:none" class="post_id">{{post.id}}</p>
-                <h5 class="card-title">{{post.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
-                </h6>
-                <p class="card-text">{{post.text}}</p>
-                <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
-                <a href="/postupdate/{{post.id}}">Update Post</a>
-            </div>
-        </div>
-    {{/each}}
+<h1 id="postID" style="display:none">{{postID}}</h1>
 
-    {{else}}
-        {{#each posts as |post| }}
-        <div class="card post-list" id={{post.id}} style="width: 50rem;">
-            <div class="card-body">
-                <p style="display:none" class="post_id">{{post.id}}</p>
-                <h5 class="card-title">{{post.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
-                </h6>
-                <p class="card-text">{{post.text}}</p>
-                {{#if logged_in}}
-                <button class="btn btn-secondary" data-id="{{post.id}}">Comment</button>
-                {{/if}}
-            </div>
+{{#each posts as |post| }}
+<div class="card post-list" style="width: 50rem;">
+    <div class="card-body">
+        <p style="display:none" class="post_id">{{post.id}}</p>
+        <h5 class="card-title">{{post.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Posted by {{post.user.username}} at {{format_date post.create_date}}
+        </h6>
+        <p class="card-text">{{post.text}}</p>
+    </div>
+</div>
+</div>
+{{/each}}
+
+{{#if editable}}
+<div class="editables" style="text-align:center">
+    <button id="delete-btn" type="submit" class="btn btn-sm btn-danger" data-id="{{postID}}">DELETE</button>
+    <a href="/postupdate/{{postID}}">Update Post</a>
+    {{/if}}
+</div>
+
+{{#if logged_in}}
+<div style="text-align:center">
+    <p>
+        {{!-- Comment button --}}
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            New Comment
+        </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+
+            {{!-- Create comment submit form here --}}
+            <form class="new-comment" style="width: 20rem;">
+                <div class="mb-3">
+                    <label for="textInput" class="form-label">Comment text:</label>
+                    <textarea type="text" class="form-control" id="comment-text" rows="3"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
-        {{/each}}
+    </div>
+</div>
 {{/if}}
 
-<div> 
-    <h4>Comments</h4>
-    {{#if logged_in}}
-        {{#each comments as |comment|}}
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        {{comment.user}} posted on {{comment.create_date}}
-                        </button>
-                    </h2>
-                </div>
-            </div>
-        {{/each}}
-    {{/if}}
 
+<div class='mb-3' style="margin:2rem">
+    <h4>Comments</h4>
+    {{#each (reverseArray comments) as |comment|}}
+    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-header">{{user.username}} on {{format_date comment.create_date}}</div>
+        <p class="card-text" style="text-align:center; margin:1rem">{{text}}</p>
+    </div>
+    {{/each}}
 </div>
 
 
 <script src="./js/delete_post.js"></script>
+<script src="./js/comment.js"></script>

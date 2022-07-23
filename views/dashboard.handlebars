@@ -19,7 +19,7 @@
 
 <div class="col">
 {{!-- Show all historical posts --}}
-{{#each posts as |post| }}
+{{#each (reverseArray posts) as |post| }}
 <div class="card">
   <div class="post-id" style="display:none">{{post.id}}</div>
     <div class="card-body">

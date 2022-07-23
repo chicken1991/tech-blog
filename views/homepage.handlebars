@@ -1,4 +1,4 @@
-{{#each posts as |post| }}
+{{#each (reverseArray posts) as |post| }}
 <div class="card col-sm" >
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
